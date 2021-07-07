@@ -8,26 +8,36 @@ type Inputs = {
 };
 
 const Home = () => {
-  const { register, handleSubmit, formState: { errors } } = useForm<Inputs>();
+  const { register, handleSubmit, formState: { isValid, errors } } = useForm<Inputs>({mode: 'onChange'});
   const onSubmit: SubmitHandler<Inputs> = data => console.log(data);
 
   return (
       <div className="body">
-        <span>About you</span>
+        <span className="bodyText">About you</span>
         <form className="form" onSubmit={handleSubmit(onSubmit)}>
             <div>
-              age: <input type="number" min="0" {...register("age", { required: true })} />
+              <span className="text">age:</span>
+              <input 
+                type="number" 
+                min="0" 
+                {...register("age", { required: true,  min: 1, max: 99 })} 
+              />
             </div>
             <div>
-              state: <input {...register("state", { required: true })} />
+              <span className="text">state:</span>
+              <input {...register("state", { required: true, pattern: /^[A-Za-z]+$/i })} />
             </div>
             <div>
-              city: <input {...register("city", { required: true })}/>
+              <span className="text">city:</span>
+              <input {...register("city", { required: true, pattern: /^[A-Za-z]+$/i })}/>
             </div>
 
-            {(errors.age || errors.state || errors.city) && <span>This field is required</span>}
+            {errors.age && <span className="error">This age is not valid</span>}
+            {(errors.state || errors.city) && (
+              <span className="error">The city or state field is not properly filled.</span>
+            )}
 
-            <input type="submit"/>
+            <input type="submit" disabled={!isValid}  className="submit"/>
         </form>
       </div>
   );

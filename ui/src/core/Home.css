@@ -7,6 +7,27 @@
   min-height: 60vh;
 }
 
+.bodyText {
+  margin-bottom: 10px;
+}
+
 .form {
   display: grid;
+}
+
+.text {
+  display: -webkit-inline-box;
+  height: 30px;
+  width: 50px;
+}
+
+.submit {
+  border-radius: 10px;
+  width: 227px; 
+}
+
+.error{
+  color: orangered;
+  font-size: 12px;
+  margin-bottom: 5px;
 }
