@@ -18,9 +18,7 @@ const Home = () => {
 
   const List = () => (
     <>
-      <div>
-        <span>Upcoming events</span>
-      </div>
+      <span>Upcoming events</span>
       <div className="list">
         <div className="item">
           <span>date 1</span>
