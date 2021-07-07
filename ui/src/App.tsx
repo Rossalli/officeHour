@@ -1,9 +1,8 @@
-import Login from './core/Login';
-import './App.css';
+import Home from './core/Home';
 
 function App() {
   return (
-    <Login />
+    <Home />
   );
 }
 
