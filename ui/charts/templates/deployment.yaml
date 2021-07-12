@@ -1,0 +1,20 @@
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: office-hours-ui
+spec:
+  replicas: 1
+  selector: 
+    matchLabels:
+      app: office-hours-ui
+  template:    
+    metadata:
+      labels:
+        app: office-hours-ui
+    spec:
+      containers:
+        - name: office-hours-ui
+          image: rossalli/office-hours-ui:v1
+          ports:
+            - containerPort: 80
