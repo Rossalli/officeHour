@@ -85,5 +85,27 @@ envVars:
 volume:
   enabled: true
   
+livenessProbe:
+  enabled: false
+  failureThreshold: 3
+  httpGet:
+    path: /v1/healthcheck
+    port: 9080
+    scheme: HTTP
+  initialDelaySeconds: 30
+  periodSeconds: 20
+  successThreshold: 1
+  timeoutSeconds: 1
+readinessProbe:
+  failureThreshold: 3
+  httpGet:
+    path: /v1/healthcheck
+    port: 9080
+    scheme: HTTP
+  initialDelaySeconds: 30
+  periodSeconds: 20
+  successThreshold: 1
+  timeoutSeconds: 1
+
 istio:
   enabled: true
