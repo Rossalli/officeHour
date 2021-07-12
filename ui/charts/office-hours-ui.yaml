@@ -1,0 +1,89 @@
+
+# Default values for details.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+appname: office-hours-ui
+component: teste
+tag: teste
+circleId: "teste"
+
+replicaCount: 1
+
+image:
+  tag: rossalli/my-ticket-ui:v1
+
+imagePullSecrets: []
+nameOverride: ""
+fullnameOverride: ""
+
+serviceAccount:
+  # Specifies whether a service account should be created
+  create: true
+  # Annotations to add to the service account
+  annotations: {}
+  # The name of the service account to use.
+  # If not set and create is true, a name is generated using the fullname template
+  name: "office-hours-ui"
+  account: "ui"
+
+podAnnotations: {}
+
+podSecurityContext: {}
+  # fsGroup: 2000
+
+securityContext:
+  enabled: false
+  runAsUser: 1000
+
+service:
+  name: office-hours-ui
+  type: ClusterIP
+  ports:
+   - name: http
+     port: 9080
+
+ingress:
+  enabled: false
+  annotations: 
+     kubernetes.io/ingress.class: nginx
+     kubernetes.io/tls-acme: "true"
+  path: /
+  hosts:
+    - name: zup.lab.realwave.zup.me
+      port: http
+  tls: 
+    - secretName: lab-realwave-zupme
+      hosts:
+        - zup.lab.realwave.zup.me
+
+configmaps:
+  enabled: false
+startcommand: 
+  enabled: false
+  value: "[\"/bin/sh\",\"-c\",\"/usr/sbin/nginx -c /data/darwin-ui-nginx.conf\"]"
+
+containerPort:
+  enabled: true
+  port: 9080
+
+resources:
+   limits:
+    cpu: 256m
+    memory: 256Mi
+   requests:
+    cpu: 128m
+    memory: 128Mi
+nodeSelector: {}
+tolerations: []
+affinity: {}
+
+envVars:
+  - name: LOG_DIR
+    value: "/tmp/logs"
+
+volume:
+  enabled: true
+  
+istio:
+  enabled: true
