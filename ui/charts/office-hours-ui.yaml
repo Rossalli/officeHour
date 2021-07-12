@@ -11,7 +11,7 @@ circleId: "teste"
 replicaCount: 1
 
 image:
-  tag: rossalli/my-ticket-ui:v1
+  tag: rossalli/office-hours-ui:v1
 
 imagePullSecrets: []
 nameOverride: ""
