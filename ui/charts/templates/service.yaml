@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: office-hours-ui-service
+spec:
+  selector:
+    app: office-hours-ui
+  ports:
+    - port: 80
+      nodePort: 30000
+  type: NodePort   
