@@ -9,9 +9,6 @@ serviceAccount:
   name: "office-hours-ui"
   account: "ui"
 
-podAnnotations: {}
-podSecurityContext: {}
-
 securityContext:
   enabled: false
   runAsUser: 1000
@@ -22,7 +19,10 @@ service:
   ports:
    - name: http
      port: 9080
-
+     
+ingress:
+  enabled: false
+  
 containerPort:
   enabled: true
   port: 9080
@@ -45,6 +45,17 @@ envVars:
 volume:
   enabled: true
   
+livenessProbe:
+  enabled: false
+  failureThreshold: 3
+  httpGet:
+    path: /v1/healthcheck
+    port: 9080
+    scheme: HTTP
+  initialDelaySeconds: 30
+  periodSeconds: 20
+  successThreshold: 1
+  timeoutSeconds: 1  
 readinessProbe:
   failureThreshold: 3
   httpGet:
