@@ -8,7 +8,7 @@ serviceAccount:
   annotations: {}
   name: "office-hours-ui"
   account: "ui"
-
+  
 securityContext:
   enabled: false
   runAsUser: 1000
@@ -22,6 +22,12 @@ service:
      
 ingress:
   enabled: false
+
+configmaps:
+  enabled: false
+startcommand: 
+  enabled: false
+  value: "[\"/bin/sh\",\"-c\",\"/usr/sbin/nginx -c /data/darwin-ui-nginx.conf\"]" 
   
 containerPort:
   enabled: true
